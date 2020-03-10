@@ -13,7 +13,9 @@
                 </a>
                 <h4 class="card-title">@Html.DisplayFor(modelItem => item.Organiser)</h4>
                 <p class="card-text">@Html.DisplayFor(modelItem => item.City)</p>
-                <p class="card-text">@Html.DisplayFor(modelItem => item.Date)</p>
+                @*<p class="card-text">@Html.DisplayFor(modelItem => item.Date)</p>*@
+                <p class="card-text">@Html.TextBoxFor(modelItem => item.Date, "{0:d MMMMMMMMM yyyy}", new {@class="date-style", @readonly=true})</p>
+                
             </div>
        
            
