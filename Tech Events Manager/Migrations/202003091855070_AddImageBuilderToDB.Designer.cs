@@ -7,13 +7,13 @@ namespace Tech_Events_Manager.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.4.0")]
-    public sealed partial class CreateEventTables : IMigrationMetadata
+    public sealed partial class AddImageBuilderToDB : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(CreateEventTables));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(AddImageBuilderToDB));
         
         string IMigrationMetadata.Id
         {
-            get { return "202003051428555_CreateEventTables"; }
+            get { return "202003091855070_AddImageBuilderToDB"; }
         }
         
         string IMigrationMetadata.Source

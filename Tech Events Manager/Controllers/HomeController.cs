@@ -14,7 +14,7 @@ namespace Tech_Events_Manager.Controllers
         // GET: Events
         public ActionResult Index()
         {
-            return View(db.Event.ToList());
+            return View(db.Event.OrderBy(a => a.Date).ToList());
         }
 
      /*   public ActionResult Index()

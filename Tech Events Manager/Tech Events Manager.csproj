@@ -180,13 +180,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202003041744180_Initial_Identity_Migration.cs" />
-    <Compile Include="Migrations\202003041744180_Initial_Identity_Migration.designer.cs">
-      <DependentUpon>202003041744180_Initial_Identity_Migration.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202003051428555_CreateEventTables.cs" />
-    <Compile Include="Migrations\202003051428555_CreateEventTables.designer.cs">
-      <DependentUpon>202003051428555_CreateEventTables.cs</DependentUpon>
+    <Compile Include="Migrations\202003091855070_AddImageBuilderToDB.cs" />
+    <Compile Include="Migrations\202003091855070_AddImageBuilderToDB.designer.cs">
+      <DependentUpon>202003091855070_AddImageBuilderToDB.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -312,6 +308,7 @@
     <Content Include="Scripts\umd\popper-utils.min.js" />
     <Content Include="Scripts\umd\popper.js" />
     <Content Include="Scripts\umd\popper.min.js" />
+    <Content Include="Style\StyleSheet1.css" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -365,6 +362,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Image\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -378,11 +376,8 @@
     <TypeScriptCompile Include="Scripts\index.d.ts" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202003041744180_Initial_Identity_Migration.resx">
-      <DependentUpon>202003041744180_Initial_Identity_Migration.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202003051428555_CreateEventTables.resx">
-      <DependentUpon>202003051428555_CreateEventTables.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202003091855070_AddImageBuilderToDB.resx">
+      <DependentUpon>202003091855070_AddImageBuilderToDB.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

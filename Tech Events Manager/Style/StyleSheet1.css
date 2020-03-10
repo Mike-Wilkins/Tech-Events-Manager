@@ -1,0 +1,14 @@
+﻿body {
+}
+
+img {
+    opacity:1.0;
+}
+
+img:hover{
+    opacity:0.6;
+}
+.card-body {
+    box-shadow: 10px 10px 5px #aaaaaa;
+    
+}
