@@ -5,6 +5,8 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Tech_Events_Manager.Models
 {
@@ -32,10 +34,12 @@ namespace Tech_Events_Manager.Models
         public string ImageTitle { get; set; }
 
         [DisplayName("Upload Image")]
-        [DataType(DataType.Upload)]
         [Required(ErrorMessage ="Choose an image to upload")]
         [StringLength(EventConstants.MAX_IMAGE_PATH_LENGTH)]
         public string ImagePath { get; set; }
+
+        [NotMapped]
+        public HttpPostedFileBase ImageFile { get; set; }
 
         [DataType(DataType.Url)]
         [Required(ErrorMessage ="Enter a valid website address")]

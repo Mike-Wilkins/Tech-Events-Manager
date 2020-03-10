@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Tech_Events_Manager.Models;
+using System.IO;
 
 namespace Tech_Events_Manager.Controllers
 {
@@ -17,7 +18,8 @@ namespace Tech_Events_Manager.Controllers
         // GET: Events
         public ActionResult Index()
         {
-            return View(db.Event.ToList());
+            // return View(db.Event.ToList()); //
+            return View(db.Event.OrderBy(a => a.Date).ToList());
         }
 
         // GET: Events/Details/5
@@ -36,6 +38,7 @@ namespace Tech_Events_Manager.Controllers
         }
 
         // GET: Events/Create
+        [HttpGet]
         public ActionResult Create()
         {
             return View();
@@ -46,17 +49,29 @@ namespace Tech_Events_Manager.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Organiser,City,Date,ImageTitle,ImagePath,Website,Postcode,Latitude,Longitude")] Event @event)
+
+
+        
+        public ActionResult Create(Event imageDB)
+
         {
-            if (ModelState.IsValid)
-            {
-                db.Event.Add(@event);
+            string filename = Path.GetFileNameWithoutExtension(imageDB.ImageFile.FileName);
+            string extension = Path.GetExtension(imageDB.ImageFile.FileName);
+            filename = filename + DateTime.Now.ToString("yymmssfff") + extension;
+            imageDB.ImagePath = "~/Image/" + filename;
+            filename = Path.Combine(Server.MapPath("~/Image/"), filename);
+            imageDB.ImageFile.SaveAs(filename);
+
+
+            { 
+                db.Event.Add(imageDB);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+               
 
-            return View(@event);
         }
+        
 
         // GET: Events/Edit/5
         public ActionResult Edit(int? id)
