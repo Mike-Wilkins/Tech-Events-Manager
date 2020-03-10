@@ -10,5 +10,9 @@ img:hover{
 }
 .card-body {
     box-shadow: 10px 10px 5px #aaaaaa;
-    
+}
+.date-style {
+    outline:none;
+    border:none;
+    text-align:center;
 }
