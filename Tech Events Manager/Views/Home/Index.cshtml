@@ -2,24 +2,77 @@
 
 
 
-    <div class="row">
-        @foreach (var item in Model)
-        {
-       
-            <div class="card-body col-md-3 m-1 mx-auto text-center">
-           
+<style>
+    /* Always set the map height explicitly to define the size of the div
+        * element that contains the map. */
+    #map {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 10px;
+        height: 400px;
+        width: 70%;
+        padding: 40px;
+    }
+</style>
+    
 
-                <a href="@Url.Content(item.Website)">
-                    <img src="@Url.Content(item.ImagePath)" width="150" height="100" opacity="1.0" />
-                </a>
-                <h4 class="card-title">@Html.DisplayFor(modelItem => item.Organiser)</h4>
-                <p class="card-text">@Html.DisplayFor(modelItem => item.City)</p>
-                @*<p class="card-text">@Html.DisplayFor(modelItem => item.Date)</p>*@
-                <p class="card-text">@Html.TextBoxFor(modelItem => item.Date, "{0:d MMMMMMMMM yyyy}", new { @class = "date-style", @readonly = true })</p>
+<div class="row">
+    <div id="map"></div>
+        <script>
+        var map;
+        function initMap() {
+            var location = { lat: 52.7670247, lng: -1.2435722 };
+            map = new google.maps.Map(document.getElementById('map'), { zoom: 9, center: location });
 
-            </div>
-
+            @foreach(var item in Model)
+            {
+               <text>
+            var marker = new google.maps.Marker({ position: {lat: @item.Latitude, lng: @item.Longitude}, map: map });
+            </text>
 
             }
 
+
+            // var marker = new google.maps.Marker({ position: location, map: map });//
+
+        }
+
+        </script>
+    
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBj8k95-RJyz0HNan_RcgS_-suLQVb7NzA&callback=initMap"
+            async defer>
+    </script>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+<div class="row">
+    @foreach (var item in Model)
+    {
+
+        <div class="card-body col-md-3 m-1 mx-auto text-center">
+
+
+            <a href="@Url.Content(item.Website)">
+                <img src="@Url.Content(item.ImagePath)" width="150" height="100" opacity="1.0" />
+            </a>
+            <h4 class="card-title">@Html.DisplayFor(modelItem => item.Organiser)</h4>
+            <p class="card-text">@Html.DisplayFor(modelItem => item.City)</p>
+            @*<p class="card-text">@Html.DisplayFor(modelItem => item.Date)</p>*@
+            <p class="card-text">@Html.TextBoxFor(modelItem => item.Date, "{0:d MMMMMMMMM yyyy}", new { @class = "date-style", @readonly = true })</p>
+
         </div>
+
+
+    }
+
+</div>
