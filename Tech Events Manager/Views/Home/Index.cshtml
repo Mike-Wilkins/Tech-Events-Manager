@@ -6,7 +6,8 @@
         @foreach (var item in Model)
         {
        
-            <div class="card-body col-md-2 m-1 mx-auto text-center">
+            <div class="card-body col-md-3 m-1 mx-auto text-center">
+           
 
                 <a href="@Url.Content(item.Website)">
                     <img src="@Url.Content(item.ImagePath)" width="150" height="100" opacity="1.0" />
@@ -14,11 +15,11 @@
                 <h4 class="card-title">@Html.DisplayFor(modelItem => item.Organiser)</h4>
                 <p class="card-text">@Html.DisplayFor(modelItem => item.City)</p>
                 @*<p class="card-text">@Html.DisplayFor(modelItem => item.Date)</p>*@
-                <p class="card-text">@Html.TextBoxFor(modelItem => item.Date, "{0:d MMMMMMMMM yyyy}", new {@class="date-style", @readonly=true})</p>
-                
-            </div>
-       
-           
-        }
+                <p class="card-text">@Html.TextBoxFor(modelItem => item.Date, "{0:d MMMMMMMMM yyyy}", new { @class = "date-style", @readonly = true })</p>
 
-    </div>
+            </div>
+
+
+            }
+
+        </div>

@@ -8,6 +8,8 @@ using System.Web;
 using System.Web.Mvc;
 using Tech_Events_Manager.Models;
 using System.IO;
+using System.Xml.XPath;
+using System.Xml.Linq;
 
 namespace Tech_Events_Manager.Controllers
 {
@@ -55,6 +57,7 @@ namespace Tech_Events_Manager.Controllers
         public ActionResult Create(Event imageDB)
 
         {
+            // Uplaod event image to database//
             string filename = Path.GetFileNameWithoutExtension(imageDB.ImageFile.FileName);
             string extension = Path.GetExtension(imageDB.ImageFile.FileName);
             filename = filename + DateTime.Now.ToString("yymmssfff") + extension;
@@ -63,13 +66,28 @@ namespace Tech_Events_Manager.Controllers
             imageDB.ImageFile.SaveAs(filename);
 
 
+
+            //Coverts postcode to latitude and longitude and upload to database//
+            string requestUri = string.Format("https://maps.googleapis.com/maps/api/geocode/xml?key={1}&address={0}&sensor=false",
+               Uri.EscapeDataString(imageDB.Postcode), "YOUR_API_KEY");
+
+            WebRequest request = WebRequest.Create(requestUri);
+            WebResponse response = request.GetResponse();
+            XDocument xdoc = XDocument.Load(response.GetResponseStream());
+
+            XElement result = xdoc.Element("GeocodeResponse").Element("result");
+            XElement locationElement = result.Element("geometry").Element("location");
+            XElement lat = locationElement.Element("lat");
+            XElement lng = locationElement.Element("lng");
+
+            imageDB.Latitude = Convert.ToDouble(lat.Value);
+            imageDB.Longitude = Convert.ToDouble(lng.Value);
+
             { 
                 db.Event.Add(imageDB);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-               
-
         }
         
 
