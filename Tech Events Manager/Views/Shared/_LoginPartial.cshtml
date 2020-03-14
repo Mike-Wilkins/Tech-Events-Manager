@@ -7,7 +7,7 @@
 
     <ul class="nav navbar-nav navbar-right">
         <li class="nav-item">
-            @Html.ActionLink("Admin User:   " + User.Identity.GetUserName(), "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage", @class = "nav-link text-light m-3" })
+            @Html.ActionLink("Admin User:   " + User.Identity.GetUserName(), "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage", @class = "nav-link text-dark m-3" })
         </li>
         <!--  <li class="nav-item"><a href="javascript:document.getElementById('logoutForm').submit()" class="nav-link text-light">Log out</a></li> -->
         <li class="nav-item"><a href="javascript:document.getElementById('logoutForm').submit()" class="btn btn-info m-3">Log out</a></li>
@@ -21,6 +21,6 @@ else
 {
 <ul class="nav navbar-nav navbar-right">
     @*<li class="nav-item">@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink", @class = "nav-link text-light"})</li>*@
-    <li class="nav-item">@Html.ActionLink("Admin", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink", @class = "nav-link text-light m-3" })</li>
+    <li class="nav-item">@Html.ActionLink("Admin", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink", @class = "nav-link text-dark m-3" })</li>
 </ul>
 }

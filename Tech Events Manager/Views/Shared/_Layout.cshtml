@@ -11,9 +11,9 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-light">
             <div class="container">
-                @Html.ActionLink("Tech Midlands MeetUp", "Index", "Home", new { area = "" }, new { @class = "navbar-brand"})
+                @Html.ActionLink("Tech Midlands MeetUp", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -23,13 +23,13 @@
                     @Html.Partial("_LoginPartial")
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            @Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "nav-link text-light" })
+                            @Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "nav-link text-dark" })
                         </li>
                         <li class="nav-item">
-                            @Html.ActionLink("About", "About", "Home", new { area = "" }, new { @class = "nav-link text-light" })
+                            @Html.ActionLink("About", "About", "Home", new { area = "" }, new { @class = "nav-link text-dark" })
                         </li>
                         <li class="nav-item">
-                            @Html.ActionLink("Contact", "Contact", "Home", new { area = "" }, new { @class = "nav-link text-light" })
+                            @Html.ActionLink("Contact", "Contact", "Home", new { area = "" }, new { @class = "nav-link text-dark" })
                         </li>
                     </ul>
                 </div>
@@ -37,6 +37,19 @@
         </nav>
 
     </header>
+
+   
+   
+    <div class="container-fluid px-0">
+        <img src="~/Image/tech3.png" class="img-fluid" style="width:100%; height: 30%; opacity: 0.9" />
+        <div class="caption">
+            <h2>Explore Tech Events</h2>
+            <h4>Find tech events hosted by local groups in the Midlands</h4>
+        </div>
+    </div>
+       
+       
+
 
     <div class="container">
         <main role="main" class="pb-3">

@@ -1,4 +1,5 @@
 ﻿body {
+    background-color: #edf1f2;
 }
 
 
@@ -6,14 +7,29 @@ img {
     opacity:1.0;
 }
 
-img:hover{
-    opacity:0.6;
-}
 .card-body {
+    background-color: white;
+    box-shadow: 3px 3px 5px #aaaaaa;
+}
+
+.card-body:hover {
     box-shadow: 10px 10px 5px #aaaaaa;
 }
 .date-style {
-    outline:none;
-    border:none;
-    text-align:center;
+    outline: none;
+    border: none;
+    text-align: center;
+    width: 70%;
+}
+.card-title {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+.caption {
+    color: white;
+    position: absolute;
+    top: 20%;
+    left: 15%;
+    width: 50%;
 }
