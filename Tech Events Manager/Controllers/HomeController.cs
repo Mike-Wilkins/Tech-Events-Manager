@@ -4,6 +4,8 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Tech_Events_Manager.Models;
+using Tech_Events_Manager.ViewModel;
+
 
 namespace Tech_Events_Manager.Controllers
 {
@@ -12,15 +14,33 @@ namespace Tech_Events_Manager.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Events
-        public ActionResult Index()
+       /* public ActionResult Index()
         {
+            
             return View(db.Event.OrderBy(a => a.Date).ToList());
+           
+        }*/
+      
+       public ActionResult Index(UserLocation location, string postcode)
+        {
+            location.UserPostcode = postcode;
+           
+
+            var viewModel = new CustomerViewModel
+            {
+                UserPostcode = postcode,
+                Event = db.Event.OrderBy(a => a.Date).ToList()
+
+            };
+
+           
+           System.Diagnostics.Debug.WriteLine(postcode);
+            return View(viewModel);
         }
 
-     /*   public ActionResult Index()
-        {
-            return View();
-        }*/
+
+
+
 
         public ActionResult About()
         {
@@ -35,5 +55,7 @@ namespace Tech_Events_Manager.Controllers
 
             return View();
         }
+
+        
     }
 }
