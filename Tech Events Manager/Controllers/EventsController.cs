@@ -16,12 +16,18 @@ namespace Tech_Events_Manager.Controllers
     public class EventsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
+       
 
         // GET: Events
         public ActionResult Index()
         {
             // return View(db.Event.ToList()); //
+           
             return View(db.Event.OrderBy(a => a.Date).ToList());
+           
+           
+
+          
         }
 
         // GET: Events/Details/5
@@ -69,7 +75,7 @@ namespace Tech_Events_Manager.Controllers
 
             //Coverts postcode to latitude and longitude and upload to database//
             string requestUri = string.Format("https://maps.googleapis.com/maps/api/geocode/xml?key={1}&address={0}&sensor=false",
-               Uri.EscapeDataString(imageDB.Postcode), "");
+               Uri.EscapeDataString(imageDB.Postcode), "ADD_API_KEY_HERE");
 
             WebRequest request = WebRequest.Create(requestUri);
             WebResponse response = request.GetResponse();

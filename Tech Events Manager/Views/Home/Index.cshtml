@@ -1,5 +1,5 @@
-﻿@model IEnumerable<Tech_Events_Manager.Models.Event>
-
+﻿
+@model Tech_Events_Manager.ViewModel.CustomerViewModel
 
 
 <style>
@@ -17,37 +17,47 @@
     }
 </style>
 
-<nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark " style="background-color:#27273b; margin-top:10px; width:75%; margin-left:auto; margin-right:auto">
-    <a class="navbar-brand px-4">Enter your postcode:</a>
-    <div class="form-inline">
+@using (Html.BeginForm("Index", "Home"))
+{
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark " style="background-color:#27273b; margin-top:10px; width:75%; margin-left:auto; margin-right:auto">
+            <a class="navbar-brand px-4">Enter your postcode:</a>
+            <div class="form-inline">
+                <input type="text" class="form-control" placeholder="Postcode" name="postcode"/>
+            </div>
 
-        <input type="text" class="form-control" placeholder="Postcode" />
-    </div>
+            <a class="navbar-brand px-4"> and distance:</a>
+            <div class="form-inline">
+                <select class="form-control mr-sm-2">
+                    <option>5 miles</option>
+                    <option>10 miles</option>
+                    <option>20 miles</option>
+                    <option>30 miles</option>
+                </select>
+                    <div class="form-actions no-color">
+                        <input type="submit" value="Search" class="btn btn-secondary" />
+                    </div>
+                </div>
+        </nav>
+}
+<div>
+    @Model.UserPostcode
+</div>
 
-    <a class="navbar-brand px-4"> and distance:</a>
-    <div class="form-inline">
-        <select class="form-control mr-sm-2">
-            <option>5 miles</option>
-            <option>10 miles</option>
-            <option>20 miles</option>
-            <option>30 miles</option>
-        </select>
-        <button class="btn btn-secondary" type="submit">Search</button>
-    </div>
-</nav>
 
-    <div class="row">
-        <div id="map"></div>
-        <script>
+<div class="row">
+    <div id="map"></div>
+    <script>
         var map;
         function initMap() {
             var location = { lat: 52.7670247, lng: -1.2435722 };
             map = new google.maps.Map(document.getElementById('map'), { zoom: 9, center: location });
 
-            @foreach(var item in Model)
+            @foreach(var item in Model.Event)
             {
                <text>
-            var marker = new google.maps.Marker({ position: {lat: @item.Latitude, lng: @item.Longitude}, map: map });
+               var marker = new google.maps.Marker({ position: { lat: @item.Latitude, lng: @item.Longitude}, map: map }); 
+           
+
             </text>
 
             }
@@ -57,32 +67,32 @@
 
         }
 
-        </script>
+    </script>
 
-        <script src="https://maps.googleapis.com/maps/api/js?key=&callback=initMap"
-                async defer>
-        </script>
-    </div>
-
-
-
-    <div class="row">
-        @foreach (var item in Model)
-        {
-
-            <div class="card-body col-md-2 mx-auto text-center m-md-2 ">
+    <script src="https://maps.googleapis.com/maps/api/js?key=&callback=initMap"
+            async defer>
+    </script>
+</div>
 
 
-                <a href="@Url.Content(item.Website)" style="text-decoration:none; color:black">
-                    <img src="@Url.Content(item.ImagePath)" style="width: 95%; height: 40%" />
-                    <h4 class="card-title">@Html.DisplayFor(modelItem => item.Organiser)</h4>
-                    <p class="card-text">@Html.DisplayFor(modelItem => item.City)</p>
-                    <p class="card-text">@Html.TextBoxFor(modelItem => item.Date, "{0:d MMMMMMMMM yyyy}", new { @class = "date-style", @readonly = true })</p>
 
-                </a>
-            </div>
+<div class="row">
+    @foreach (var item in Model.Event)
+    {
+
+        <div class="card-body col-md-2 mx-auto text-center m-md-2 ">
 
 
-        }
+            <a href="@Url.Content(item.Website)" style="text-decoration:none; color:black">
+                <img src="@Url.Content(item.ImagePath)" style="width: 95%; height: 40%" />
+                <h4 class="card-title">@Html.DisplayFor(modelItem => item.Organiser)</h4>
+                <p class="card-text">@Html.DisplayFor(modelItem => item.City)</p>
+                <p class="card-text">@Html.TextBoxFor(modelItem => item.Date, "{0:d MMMMMMMMM yyyy}", new { @class = "date-style", @readonly = true })</p>
 
-    </div>
+            </a>
+        </div>
+
+
+    }
+
+</div>
