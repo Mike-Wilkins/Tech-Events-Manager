@@ -21,7 +21,7 @@ namespace Tech_Events_Manager.Controllers
             if (postcode != null)
             {
             string requestUri = string.Format("https://maps.googleapis.com/maps/api/geocode/xml?key={1}&address={0}&sensor=false",
-              Uri.EscapeDataString(postcode), "AIzaSyBj8k95-RJyz0HNan_RcgS_-suLQVb7NzA");
+              Uri.EscapeDataString(postcode), "ENTRE_API_KEY_HERE");
 
             WebRequest request = WebRequest.Create(requestUri);
             WebResponse response = request.GetResponse();
