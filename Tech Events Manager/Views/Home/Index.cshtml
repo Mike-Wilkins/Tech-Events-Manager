@@ -39,9 +39,7 @@
                 </div>
         </nav>
 }
-<div>
-    @Model.UserPostcode
-</div>
+
 
 
 <div class="row">
@@ -55,13 +53,28 @@
             @foreach(var item in Model.Event)
             {
                <text>
-               var marker = new google.maps.Marker({ position: { lat: @item.Latitude, lng: @item.Longitude}, map: map }); 
-           
+            var event_image = 'http://maps.google.com/mapfiles/ms/icons/red-dot.png';
+            var marker = new google.maps.Marker({
+                position: { lat: @item.Latitude, lng: @item.Longitude},
+                map: map,
+                icon: event_image
+
+                
+            }); 
+   
 
             </text>
 
             }
-
+           
+            var image = 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png';
+            var usermarker = new google.maps.Marker({
+                position: { lat: @Model.UserLat , lng:  @Model.UserLng},
+                map: map,
+                animation: google.maps.Animation.BOUNCE,
+                icon: image,
+                
+            })
 
             // var marker = new google.maps.Marker({ position: location, map: map });//
 
@@ -69,7 +82,7 @@
 
     </script>
 
-    <script src="https://maps.googleapis.com/maps/api/js?key=&callback=initMap"
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBj8k95-RJyz0HNan_RcgS_-suLQVb7NzA&callback=initMap"
             async defer>
     </script>
 </div>

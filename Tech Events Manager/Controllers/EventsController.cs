@@ -75,7 +75,7 @@ namespace Tech_Events_Manager.Controllers
 
             //Coverts postcode to latitude and longitude and upload to database//
             string requestUri = string.Format("https://maps.googleapis.com/maps/api/geocode/xml?key={1}&address={0}&sensor=false",
-               Uri.EscapeDataString(imageDB.Postcode), "ADD_API_KEY_HERE");
+               Uri.EscapeDataString(imageDB.Postcode), "AIzaSyBj8k95-RJyz0HNan_RcgS_-suLQVb7NzA");
 
             WebRequest request = WebRequest.Create(requestUri);
             WebResponse response = request.GetResponse();

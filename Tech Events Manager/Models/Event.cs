@@ -56,7 +56,8 @@ namespace Tech_Events_Manager.Models
 
     public class UserLocation
     {
-        public string UserPostcode { get; set; }
+        public double UserLat { get; set; }
+        public double UserLng { get; set; }
     }
 
     
