@@ -13,10 +13,13 @@ namespace Tech_Events_Manager.ViewModel
 {
     public class CustomerViewModel
     {
-        
 
-       // public int Id { get; set; }//
-        public string UserPostcode { get; set; }
+
+        // public int Id { get; set; }//
+        // public string UserPostcode { get; set; }//
+
+        public double UserLat { get; set; }
+        public double UserLng { get; set; }
         public IEnumerable<Event> Event { get; set; }
 
     }
