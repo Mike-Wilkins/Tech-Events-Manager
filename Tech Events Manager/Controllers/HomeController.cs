@@ -21,7 +21,7 @@ namespace Tech_Events_Manager.Controllers
             if (postcode != null)
             {
             string requestUri = string.Format("https://maps.googleapis.com/maps/api/geocode/xml?key={1}&address={0}&sensor=false",
-              Uri.EscapeDataString(postcode), "ENTRE_API_KEY_HERE");
+              Uri.EscapeDataString(postcode), "ENTER_API_KEY_HERE");
 
             WebRequest request = WebRequest.Create(requestUri);
             WebResponse response = request.GetResponse();
@@ -36,8 +36,8 @@ namespace Tech_Events_Manager.Controllers
             location.UserLng = Convert.ToDouble(lng.Value);
 
 
-            System.Diagnostics.Debug.WriteLine("User Latitude: " + location.UserLat);
-            System.Diagnostics.Debug.WriteLine("User Longitude: " + location.UserLng);
+            //System.Diagnostics.Debug.WriteLine("User Latitude: " + location.UserLat);
+            //System.Diagnostics.Debug.WriteLine("User Longitude: " + location.UserLng);
 
 
             }

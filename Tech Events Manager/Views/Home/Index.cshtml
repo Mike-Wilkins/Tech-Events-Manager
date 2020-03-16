@@ -45,44 +45,74 @@
 <div class="row">
     <div id="map"></div>
     <script>
+        function resetMapOrigin(){
+          map.setZoom(9);
+          map.setCenter({lat:52.7670247,lng:-1.2435722});
+        };
+
+       
+         function resetUserOrigin(){
+          map.setZoom(9);
+          map.setCenter({lat: @Model.UserLat, lng: @Model.UserLng});
+        };
+       
         var map;
         function initMap() {
             var location = { lat: 52.7670247, lng: -1.2435722 };
-            map = new google.maps.Map(document.getElementById('map'), { zoom: 9, center: location });
+            var userLocation = { lat: @Model.UserLat, lng: @Model.UserLng};
+
+            if (@Model.UserLat == 0) {
+                map = new google.maps.Map(document.getElementById('map'), { zoom: 9, center: location });
+            } else {
+                map = new google.maps.Map(document.getElementById('map'), { zoom: 9, center: userLocation });
+            };
+
+            var infowindow = new google.maps.InfoWindow();
 
             @foreach(var item in Model.Event)
             {
-               <text>
-            var event_image = 'http://maps.google.com/mapfiles/ms/icons/red-dot.png';
-            var marker = new google.maps.Marker({
-                position: { lat: @item.Latitude, lng: @item.Longitude},
-                map: map,
-                icon: event_image
+              <text>
 
-                
-            }); 
-   
+                    var event_image = 'http://maps.google.com/mapfiles/ms/icons/red-dot.png';
+                    var marker = new google.maps.Marker({
+                        position: { lat: @item.Latitude, lng: @item.Longitude},
+                        map: map,
+                        icon: event_image 
+                    }); 
+                marker.addListener('click', function () {
+                infowindow.setContent(
+                    "<div id = 'infowindow' > <h5>@item.Organiser</h5> <h6><a href='@item.Website'>Event Website</a></h6></div > ");
+                infowindow.open(map, this);
+                map.setCenter(this.getPosition());
+                    map.setZoom(12);
+                    google.maps.event.addListener(infowindow, 'closeclick', function () { 
+                        if (@Model.UserLat == 0) {
+                            resetMapOrigin();
+                        } else {
+                            resetUserOrigin();
+                        };
+                        
+                    });
+                    
+                });
 
-            </text>
+              </text>
 
             }
-           
+
             var image = 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png';
             var usermarker = new google.maps.Marker({
-                position: { lat: @Model.UserLat , lng:  @Model.UserLng},
+                position: { lat: @Model.UserLat, lng: @Model.UserLng},
                 map: map,
                 animation: google.maps.Animation.BOUNCE,
                 icon: image,
                 
-            })
-
-            // var marker = new google.maps.Marker({ position: location, map: map });//
-
+            });
         }
 
     </script>
 
-    <script src="https://maps.googleapis.com/maps/api/js?key=ENER_API_KEY_HERE&callback=initMap"
+    <script src="https://maps.googleapis.com/maps/api/js?key=ENTER_API_KEY_HERE&callback=initMap"
             async defer>
     </script>
 </div>
