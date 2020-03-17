@@ -58,6 +58,7 @@ namespace Tech_Events_Manager.Models
     {
         public double UserLat { get; set; }
         public double UserLng { get; set; }
+        public double Distance { get; set; }
     }
 
     

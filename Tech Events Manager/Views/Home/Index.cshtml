@@ -19,26 +19,31 @@
 
 @using (Html.BeginForm("Index", "Home"))
 {
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark " style="background-color:#27273b; margin-top:10px; width:75%; margin-left:auto; margin-right:auto">
-            <a class="navbar-brand px-4">Enter your postcode:</a>
-            <div class="form-inline">
-                <input type="text" class="form-control" placeholder="Postcode" name="postcode"/>
-            </div>
+<nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark " style="background-color:#27273b; margin-top:10px; width:75%; margin-left:auto; margin-right:auto">
+    <a class="navbar-brand px-4">Enter your postcode:</a>
+    <div class="form-inline">
+        <input type="text" class="form-control" placeholder="Postcode" name="postcode" />
+    </div>
 
-            <a class="navbar-brand px-4"> and distance:</a>
-            <div class="form-inline">
-                <select class="form-control mr-sm-2">
-                    <option>5 miles</option>
-                    <option>10 miles</option>
-                    <option>20 miles</option>
-                    <option>30 miles</option>
-                </select>
-                    <div class="form-actions no-color">
-                        <input type="submit" value="Search" class="btn btn-secondary" />
-                    </div>
-                </div>
-        </nav>
+    <a class="navbar-brand px-4"> and distance:</a>
+    <div class="form-inline">
+      <select type="text" class="form-control mr-sm-2" name="distance">
+          <option>5</option>
+          <option>10</option>
+          <option>20</option>
+          <option>30</option>
+      </select>
+       
+    </div>
+    <div class="form-actions no-color">
+        <input type="submit" value="Search" class="btn btn-secondary" />
+    </div>
+</nav>
 }
+
+<div>
+    @Model.Distance
+</div>
 
 
 
@@ -48,18 +53,21 @@
         function resetMapOrigin(){
           map.setZoom(9);
           map.setCenter({lat:52.7670247,lng:-1.2435722});
+
         };
 
-       
+
          function resetUserOrigin(){
           map.setZoom(9);
           map.setCenter({lat: @Model.UserLat, lng: @Model.UserLng});
         };
-       
+
+
         var map;
         function initMap() {
             var location = { lat: 52.7670247, lng: -1.2435722 };
             var userLocation = { lat: @Model.UserLat, lng: @Model.UserLng};
+
 
             if (@Model.UserLat == 0) {
                 map = new google.maps.Map(document.getElementById('map'), { zoom: 9, center: location });
@@ -69,36 +77,75 @@
 
             var infowindow = new google.maps.InfoWindow();
 
-            @foreach(var item in Model.Event)
-            {
-              <text>
 
+
+
+
+            @foreach (var item in Model.Event)
+            {
+                double userLat = @Model.UserLat;
+                double userLng = @Model.UserLng;
+                double eventLat = Convert.ToDouble(item.Latitude);
+                double eventLng = Convert.ToDouble(item.Longitude);
+
+                double rlat1 = Math.PI * userLat / 180;
+                double rlat2 = Math.PI * eventLat / 180;
+                double theta = userLng - eventLng;
+                double rtheta = Math.PI * theta / 180;
+                double dist =
+                    Math.Sin(rlat1) * Math.Sin(rlat2) + Math.Cos(rlat1) *
+                    Math.Cos(rlat2) * Math.Cos(rtheta);
+
+                dist = Math.Acos(dist);
+                dist = dist * 180 / Math.PI;
+                dist = dist * 60 * 1.1515;
+
+
+                double result = dist.CompareTo(@Model.Distance);
+
+                System.Diagnostics.Debug.WriteLine(dist + " " + item.Organiser + " " + @Model.Distance + " Result " + result);
+
+
+               
+
+
+              <text>
                     var event_image = 'http://maps.google.com/mapfiles/ms/icons/red-dot.png';
                     var marker = new google.maps.Marker({
                         position: { lat: @item.Latitude, lng: @item.Longitude},
+
                         map: map,
-                        icon: event_image 
-                    }); 
-                marker.addListener('click', function () {
-                infowindow.setContent(
-                    "<div id = 'infowindow' > <h5>@item.Organiser</h5> <h6><a href='@item.Website'>Event Website</a></h6></div > ");
-                infowindow.open(map, this);
-                map.setCenter(this.getPosition());
-                    map.setZoom(12);
-                    google.maps.event.addListener(infowindow, 'closeclick', function () { 
-                        if (@Model.UserLat == 0) {
-                            resetMapOrigin();
-                        } else {
-                            resetUserOrigin();
-                        };
-                        
+                        icon: event_image
+                        });
+                    marker.addListener('click', function () {
+                        infowindow.setContent(
+                            "<div id = 'infowindow' > <h5>@item.Organiser</h5> <h6><a href='@item.Website'>Event Website</a></h6></div > ");
+                        infowindow.open(map, this);
+                        map.setCenter(this.getPosition());
+                        map.setZoom(12);
+                            google.maps.event.addListener(infowindow, 'closeclick', function () {
+                                if (@Model.UserLat == 0) {
+                                    resetMapOrigin();
+                                } else {
+                                    resetUserOrigin();
+                                };
+
                     });
-                    
+
                 });
 
               </text>
 
-            }
+            };
+
+
+
+            
+
+
+
+
+
 
             var image = 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png';
             var usermarker = new google.maps.Marker({
@@ -106,13 +153,13 @@
                 map: map,
                 animation: google.maps.Animation.BOUNCE,
                 icon: image,
-                
+
             });
         }
 
     </script>
 
-    <script src="https://maps.googleapis.com/maps/api/js?key=ENTER_API_KEY_HERE&callback=initMap"
+    <script src="https://maps.googleapis.com/maps/api/js?key=&callback=initMap"
             async defer>
     </script>
 </div>
