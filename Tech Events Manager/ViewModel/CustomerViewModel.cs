@@ -17,6 +17,7 @@ namespace Tech_Events_Manager.ViewModel
 
         // public int Id { get; set; }//
         // public string UserPostcode { get; set; }//
+        public double Distance { get; set; }
 
         public double UserLat { get; set; }
         public double UserLng { get; set; }

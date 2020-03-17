@@ -16,10 +16,16 @@ namespace Tech_Events_Manager.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        public ActionResult Index(UserLocation location, string postcode)
+        public ActionResult Index(UserLocation location, string postcode, string distance)
         {
-            if (postcode != null)
+
+            
+ 
+            if (postcode != null && distance != null)
             {
+
+            location.Distance = Convert.ToDouble(distance);
+           
             string requestUri = string.Format("https://maps.googleapis.com/maps/api/geocode/xml?key={1}&address={0}&sensor=false",
               Uri.EscapeDataString(postcode), "ENTER_API_KEY_HERE");
 
@@ -36,8 +42,9 @@ namespace Tech_Events_Manager.Controllers
             location.UserLng = Convert.ToDouble(lng.Value);
 
 
-            //System.Diagnostics.Debug.WriteLine("User Latitude: " + location.UserLat);
-            //System.Diagnostics.Debug.WriteLine("User Longitude: " + location.UserLng);
+                //System.Diagnostics.Debug.WriteLine("User Latitude: " + location.UserLat);
+                //System.Diagnostics.Debug.WriteLine("User Longitude: " + location.UserLng);
+              
 
 
             }
@@ -49,6 +56,7 @@ namespace Tech_Events_Manager.Controllers
             {
                 UserLat = location.UserLat,
                 UserLng = location.UserLng,
+                Distance = location.Distance,
                 Event = db.Event.OrderBy(a => a.Date).ToList()
 
             };
