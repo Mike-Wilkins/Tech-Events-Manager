@@ -40,17 +40,7 @@ namespace Tech_Events_Manager.Controllers
 
             location.UserLat = Convert.ToDouble(lat.Value);
             location.UserLng = Convert.ToDouble(lng.Value);
-
-
-                //System.Diagnostics.Debug.WriteLine("User Latitude: " + location.UserLat);
-                //System.Diagnostics.Debug.WriteLine("User Longitude: " + location.UserLng);
-              
-
-
             }
-
-
-
 
             var viewModel = new CustomerViewModel
             {
