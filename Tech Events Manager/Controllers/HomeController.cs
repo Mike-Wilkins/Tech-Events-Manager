@@ -19,15 +19,15 @@ namespace Tech_Events_Manager.Controllers
         public ActionResult Index(UserLocation location, string postcode, string distance)
         {
 
-            
+            location.UserPostcode = postcode;
  
-            if (postcode != null && distance != null)
+            if (location.UserPostcode != null && distance != null)
             {
 
             location.Distance = Convert.ToDouble(distance);
            
             string requestUri = string.Format("https://maps.googleapis.com/maps/api/geocode/xml?key={1}&address={0}&sensor=false",
-              Uri.EscapeDataString(postcode), "ENTER_API_KEY_HERE");
+              Uri.EscapeDataString(location.UserPostcode), "AIzaSyBj8k95-RJyz0HNan_RcgS_-suLQVb7NzA");
 
             WebRequest request = WebRequest.Create(requestUri);
             WebResponse response = request.GetResponse();
@@ -47,6 +47,7 @@ namespace Tech_Events_Manager.Controllers
                 UserLat = location.UserLat,
                 UserLng = location.UserLng,
                 Distance = location.Distance,
+                UserPostcode = location.UserPostcode,
                 Event = db.Event.OrderBy(a => a.Date).ToList()
 
             };

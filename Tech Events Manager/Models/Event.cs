@@ -47,7 +47,6 @@ namespace Tech_Events_Manager.Models
         public string Website { get; set; }
 
         [Required(ErrorMessage = "Enter a valid postcode")]
-        [RegularExpression("^([A-Z]{1,2})([0-9][0-9A-Z]?) ([0-9])([ABDEFGHJLNPQRSTUWXYZ]{2})$")]
         public string Postcode { get; set; }
         public double? Latitude { get; set; }
         public double? Longitude { get; set; }
@@ -59,6 +58,9 @@ namespace Tech_Events_Manager.Models
         public double UserLat { get; set; }
         public double UserLng { get; set; }
         public double Distance { get; set; }
+        [Required(ErrorMessage = "Enter a valid postcode")]
+        [RegularExpression("^([A-Z]{1,2})([0-9][0-9A-Z]?) ([0-9])([ABDEFGHJLNPQRSTUWXYZ]{2})$")]
+        public string UserPostcode { get; set; }
     }
 
     

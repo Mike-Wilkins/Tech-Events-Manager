@@ -13,10 +13,8 @@ namespace Tech_Events_Manager.ViewModel
 {
     public class CustomerViewModel
     {
-
-
-        // public int Id { get; set; }//
-        // public string UserPostcode { get; set; }//
+        [Required(ErrorMessage = "Enter a valid postcode")]
+        public string UserPostcode { get; set; }
         public double Distance { get; set; }
 
         public double UserLat { get; set; }
