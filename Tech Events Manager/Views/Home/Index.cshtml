@@ -101,7 +101,7 @@
                 double result = dist.CompareTo(Model.Distance);
 
 
-                if (Model.UserLat == 0) {
+                if (Model.UserLat == 0 || result == -1) {
 
 
               <text>
@@ -131,47 +131,9 @@
 
               </text>
                 }
-                else { if(result == -1)
-                    {
-              <text>
-                    var event_image = 'http://maps.google.com/mapfiles/ms/icons/red-dot.png';
-                    var marker = new google.maps.Marker({
-                        position: { lat: @item.Latitude, lng: @item.Longitude},
-
-                        map: map,
-                        icon: event_image
-                        });
-                    marker.addListener('click', function () {
-                        infowindow.setContent(
-                            "<div id = 'infowindow' > <h5>@item.Organiser</h5> <h6><a href='@item.Website'>Event Website</a></h6></div > ");
-                        infowindow.open(map, this);
-                        map.setCenter(this.getPosition());
-                        map.setZoom(12);
-                            google.maps.event.addListener(infowindow, 'closeclick', function () {
-                                if (@Model.UserLat == 0) {
-                                    resetMapOrigin();
-                                } else {
-                                    resetUserOrigin();
-                                };
-
-                    });
-
-                });
-
-              </text>
-
-                    } }
+           
 
             };
-
-
-
-
-
-
-
-
-
 
             var image = 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png';
             var usermarker = new google.maps.Marker({
@@ -185,12 +147,10 @@
 
     </script>
 
-    <script src="https://maps.googleapis.com/maps/api/js?key=ENTER_API_KEY_HERE&callback=initMap"
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBj8k95-RJyz0HNan_RcgS_-suLQVb7NzA&callback=initMap"
             async defer>
     </script>
 </div>
-
-
 
 <div class="row">
     @foreach (var item in Model.Event)
@@ -207,7 +167,6 @@
 
             </a>
         </div>
-
 
     }
 
