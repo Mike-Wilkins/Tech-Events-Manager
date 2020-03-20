@@ -15,6 +15,7 @@ namespace Tech_Events_Manager.Controllers
     public class HomeController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
+        
 
         // GET: /Home/Index
         public ActionResult Index()
