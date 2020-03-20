@@ -16,18 +16,30 @@ namespace Tech_Events_Manager.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        public ActionResult Index(UserLocation location, string postcode, string distance)
+        // GET: /Home/Index
+        public ActionResult Index()
         {
-
-            location.UserPostcode = postcode;
- 
-            if (location.UserPostcode != null && distance != null)
+            var model = new CustomerViewModel
             {
+              
+               Event = db.Event.OrderBy(a => a.Date).ToList()
+            };
+           
+            return View(model);
+        }
+        
 
-            location.Distance = Convert.ToDouble(distance);
+        // POST: /Home/Index
+        [HttpPost]
+        public ActionResult Index(UserLocation location)
+        {
+            
+
+            if (ModelState.IsValid)
+            {
            
             string requestUri = string.Format("https://maps.googleapis.com/maps/api/geocode/xml?key={1}&address={0}&sensor=false",
-              Uri.EscapeDataString(location.UserPostcode), "ENTER_API_KEY");
+              Uri.EscapeDataString(location.UserPostcode), "ENTER_API_KEY_HERE");
 
             WebRequest request = WebRequest.Create(requestUri);
             WebResponse response = request.GetResponse();
@@ -47,16 +59,13 @@ namespace Tech_Events_Manager.Controllers
                 UserLat = location.UserLat,
                 UserLng = location.UserLng,
                 Distance = location.Distance,
-                UserPostcode = location.UserPostcode,
                 Event = db.Event.OrderBy(a => a.Date).ToList()
 
             };
 
+           // ModelState.Clear();
             return View(viewModel);
         }
-
-
-
 
 
         public ActionResult About()

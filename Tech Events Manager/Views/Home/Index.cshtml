@@ -3,8 +3,7 @@
 
 
 <style>
-    /* Always set the map height explicitly to define the size of the div
-        * element that contains the map. */
+   
     #map {
         display: block;
         margin-left: auto;
@@ -15,33 +14,40 @@
         width: 80%;
         padding: 40px;
     }
+    
 </style>
 
-@using (Html.BeginForm("Index", "Home"))
+@using (Html.BeginForm("Index", "Home", FormMethod.Post))
 {
 <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark " style="background-color:#27273b; margin-top:10px; width:75%; margin-left:auto; margin-right:auto">
     <a class="navbar-brand px-4">Enter your postcode:</a>
+
     <div class="form-inline">
-        <input type="text" class="form-control" placeholder="Postcode" name="postcode" />
+
+        @Html.TextBoxFor(m => m.UserPostcode, new { @class = "form-control", @placeholder = "Postcode" })
+        @Html.ValidationMessageFor(m => m.UserPostcode, "", new { @class = "field-validation", @style = "color:red" })
+       
     </div>
 
     <a class="navbar-brand px-4"> and distance:</a>
     <div class="form-inline">
-        <select type="text" class="form-control mr-sm-2" name="distance">
-            <option>5</option>
-            <option>10</option>
-            <option>20</option>
-            <option>30</option>
-            <option>40</option>
-        </select>
-       
+
+        @Html.DropDownListFor(m => m.Distance, new List<SelectListItem>
+           {
+               new SelectListItem() {Text = "5", Value="5"},
+               new SelectListItem() {Text = "10", Value="10"},
+               new SelectListItem() {Text = "20", Value="20"},
+               new SelectListItem() {Text = "30", Value="30"},
+               new SelectListItem() {Text = "40", Value="40"}
+           }, new { @class = "form-control" })
+
     </div>
-    <div class="form-actions no-color">
+    <div class="form-actions no-color px-4">
         <input type="submit" value="Search" class="btn btn-secondary" />
     </div>
+
 </nav>
 }
-
 
 
 <div class="row">
@@ -52,13 +58,10 @@
           map.setCenter({lat:52.7670247,lng:-1.2435722});
 
         };
-
-
          function resetUserOrigin(){
           map.setZoom(9);
           map.setCenter({lat: @Model.UserLat, lng: @Model.UserLng});
         };
-
 
         var map;
         function initMap() {
@@ -73,9 +76,6 @@
             };
 
             var infowindow = new google.maps.InfoWindow();
-
-
-
 
 
             @foreach (var item in Model.Event)
@@ -147,7 +147,7 @@
 
     </script>
 
-    <script src="https://maps.googleapis.com/maps/api/js?key=&callback=initMap"
+    <script src="https://maps.googleapis.com/maps/api/js?key=ENTER_API_KEY_HERE&callback=initMap"
             async defer>
     </script>
 </div>
