@@ -100,67 +100,72 @@
 
                 @foreach (var item in Model.Event)
                 {
-                    double userLat = Model.UserLat;
-                    double userLng = Model.UserLng;
-                    double eventLat = Convert.ToDouble(item.Latitude);
-                    double eventLng = Convert.ToDouble(item.Longitude);
+                   
 
-                    double rlat1 = Math.PI * userLat / 180;
-                    double rlat2 = Math.PI * eventLat / 180;
-                    double theta = userLng - eventLng;
-                    double rtheta = Math.PI * theta / 180;
-                    double dist =
-                        Math.Sin(rlat1) * Math.Sin(rlat2) + Math.Cos(rlat1) *
-                        Math.Cos(rlat2) * Math.Cos(rtheta);
+                        double userLat = Model.UserLat;
+                        double userLng = Model.UserLng;
+                        double eventLat = Convert.ToDouble(item.Latitude);
+                        double eventLng = Convert.ToDouble(item.Longitude);
 
-                    dist = Math.Acos(dist);
-                    dist = dist * 180 / Math.PI;
-                    dist = dist * 60 * 1.1515;
+                        double rlat1 = Math.PI * userLat / 180;
+                        double rlat2 = Math.PI * eventLat / 180;
+                        double theta = userLng - eventLng;
+                        double rtheta = Math.PI * theta / 180;
+                        double dist =
+                            Math.Sin(rlat1) * Math.Sin(rlat2) + Math.Cos(rlat1) *
+                            Math.Cos(rlat2) * Math.Cos(rtheta);
 
-
-                    double result = dist.CompareTo(Model.Distance);
-
-
-                    if (Model.UserLat == 0 || result == -1) {
+                        dist = Math.Acos(dist);
+                        dist = dist * 180 / Math.PI;
+                        dist = dist * 60 * 1.1515;
 
 
-                  <text>
-                        var event_image = 'http://maps.google.com/mapfiles/ms/icons/red-dot.png';
-                        var marker = new google.maps.Marker({
-                            position: { lat: @item.Latitude, lng: @item.Longitude},
-
-                            map: map,
-                            icon: event_image
-                            });
-                        marker.addListener('click', function () {
-                            infowindow.setContent(
-                                "<div id = 'infowindow' > <h5>@item.Organiser</h5> <h6><a href='@item.Website'>Event Website</a></h6></div > ");
-                            infowindow.open(map, this);
-                            map.setCenter(this.getPosition());
-                            map.setZoom(12);
-                                google.maps.event.addListener(infowindow, 'closeclick', function () {
-                                    if (@Model.UserLat == 0) {
-                                        resetMapOrigin();
-                                    } else {
-                                        resetUserOrigin();
-                                    };
-
-                        });
-
-                    });
-
-                  </text>
-                    }
+                        double result = dist.CompareTo(Model.Distance);
 
 
-                };
+                        if ((Model.UserLat == 0 || result == -1) && item.Date > DateTime.Now)
+                        {
 
-                var image = 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png';
-                var usermarker = new google.maps.Marker({
-                    position: { lat: @Model.UserLat, lng: @Model.UserLng},
-                    map: map,
-                    animation: google.maps.Animation.BOUNCE,
-                    icon: image,
+                              <text>
+                                    var event_image = 'http://maps.google.com/mapfiles/ms/icons/red-dot.png';
+                                    var marker = new google.maps.Marker({
+                                        position: { lat: @item.Latitude, lng: @item.Longitude},
+
+                                        map: map,
+                                        icon: event_image
+                                        });
+                                         marker.addListener('click', function () 
+                                         {
+                                        infowindow.setContent(
+                                            "<div id = 'infowindow' > <h5>@item.Organiser</h5> <h6><a href='@item.Website'>Event Website</a></h6></div > ");
+                                        infowindow.open(map, this);
+                                        map.setCenter(this.getPosition());
+                                        map.setZoom(12);
+                                             google.maps.event.addListener(infowindow, 'closeclick', function ()
+                                             {
+                                                if (@Model.UserLat == 0) {
+                                                    resetMapOrigin();
+                                                } else {
+                                                    resetUserOrigin();
+                                                };
+
+                                             });
+
+                                         });
+
+                              </text>
+                        }
+                            
+
+
+                        };
+
+                        var image = 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png';
+                        var usermarker = new google.maps.Marker({
+                        position: { lat: @Model.UserLat, lng: @Model.UserLng},
+                        map: map,
+                        animation: google.maps.Animation.BOUNCE,
+                        icon: image,
 
                 });
             }

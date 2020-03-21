@@ -73,7 +73,7 @@
                 double result = dist.CompareTo(Model.Distance);
 
 
-                if (Model.UserLat == 0 || result == -1) {
+                if ((Model.UserLat == 0 || result == -1) && item.Date > DateTime.Now) {
 
               <text>
                     var event_image = 'http://maps.google.com/mapfiles/ms/icons/red-dot.png';
@@ -118,7 +118,7 @@
 
     </script>
 
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBj8k95-RJyz0HNan_RcgS_-suLQVb7NzA&callback=initMap"
+    <script src="https://maps.googleapis.com/maps/api/js?key=ENTER_API_KEY_HERE&callback=initMap"
             async defer>
     </script>
 </div>
