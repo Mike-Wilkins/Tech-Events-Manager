@@ -32,15 +32,13 @@ namespace Tech_Events_Manager.Controllers
 
         // POST: /Home/Index
         [HttpPost]
-        public ActionResult Index(UserLocation location)
+        public PartialViewResult Index(UserLocation location)
         {
-            
-
             if (ModelState.IsValid)
             {
            
             string requestUri = string.Format("https://maps.googleapis.com/maps/api/geocode/xml?key={1}&address={0}&sensor=false",
-              Uri.EscapeDataString(location.UserPostcode), "ENTER_API_KEY_HERE");
+              Uri.EscapeDataString(location.UserPostcode), "AIzaSyBj8k95-RJyz0HNan_RcgS_-suLQVb7NzA");
 
             WebRequest request = WebRequest.Create(requestUri);
             WebResponse response = request.GetResponse();
@@ -60,12 +58,11 @@ namespace Tech_Events_Manager.Controllers
                 UserLat = location.UserLat,
                 UserLng = location.UserLng,
                 Distance = location.Distance,
-                Event = db.Event.OrderBy(a => a.Date).ToList()
+                Event = db.Event.OrderBy(a => a.Date).Take(10).ToList()
 
             };
 
-           // ModelState.Clear();
-            return View(viewModel);
+            return PartialView("_GoogleMap", viewModel);
         }
 
 

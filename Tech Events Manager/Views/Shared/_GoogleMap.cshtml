@@ -1,0 +1,125 @@
+﻿
+@model Tech_Events_Manager.ViewModel.CustomerViewModel
+
+<style>
+
+    #map {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 20px;
+        margin-bottom: 10px;
+        height: 440px;
+        width: 80%;
+        padding: 40px;
+    }
+
+    .field-validation {
+        font-size: 0.9em;
+        color: white;
+        font-style: italic;
+    }
+</style>
+<!-- Create Google Map ------------------->
+
+<div class="row">
+   
+    <script>
+
+        function resetMapOrigin(){
+          map.setZoom(9);
+          map.setCenter({lat:52.7670247,lng:-1.2435722});
+
+        };
+         function resetUserOrigin(){
+          map.setZoom(9);
+          map.setCenter({lat: @Model.UserLat, lng: @Model.UserLng});
+        };
+
+        var map;
+        function initMap() {
+            var location = { lat: 52.7670247, lng: -1.2435722 };
+            var userLocation = { lat: @Model.UserLat, lng: @Model.UserLng};
+
+
+            if (@Model.UserLat == 0) {
+                map = new google.maps.Map(document.getElementById('map'), { zoom: 9, center: location });
+            } else {
+                map = new google.maps.Map(document.getElementById('map'), { zoom: 9, center: userLocation });
+            };
+
+            var infowindow = new google.maps.InfoWindow();
+
+            @foreach (var item in Model.Event)
+            {
+                double userLat = Model.UserLat;
+                double userLng = Model.UserLng;
+                double eventLat = Convert.ToDouble(item.Latitude);
+                double eventLng = Convert.ToDouble(item.Longitude);
+
+                double rlat1 = Math.PI * userLat / 180;
+                double rlat2 = Math.PI * eventLat / 180;
+                double theta = userLng - eventLng;
+                double rtheta = Math.PI * theta / 180;
+                double dist =
+                    Math.Sin(rlat1) * Math.Sin(rlat2) + Math.Cos(rlat1) *
+                    Math.Cos(rlat2) * Math.Cos(rtheta);
+
+                dist = Math.Acos(dist);
+                dist = dist * 180 / Math.PI;
+                dist = dist * 60 * 1.1515;
+
+
+                double result = dist.CompareTo(Model.Distance);
+
+
+                if (Model.UserLat == 0 || result == -1) {
+
+              <text>
+                    var event_image = 'http://maps.google.com/mapfiles/ms/icons/red-dot.png';
+                    var marker = new google.maps.Marker({
+                        position: { lat: @item.Latitude, lng: @item.Longitude},
+
+                        map: map,
+                        icon: event_image
+                        });
+                    marker.addListener('click', function () {
+                        infowindow.setContent(
+                            "<div id = 'infowindow' > <h5>@item.Organiser</h5> <h6><a href='@item.Website'>Event Website</a></h6></div > ");
+                        infowindow.open(map, this);
+                        map.setCenter(this.getPosition());
+                        map.setZoom(12);
+                            google.maps.event.addListener(infowindow, 'closeclick', function () {
+                                if (@Model.UserLat == 0) {
+                                    resetMapOrigin();
+                                } else {
+                                    resetUserOrigin();
+                                };
+
+                    });
+
+                });
+
+              </text>
+                       }
+
+
+            };
+
+            var image = 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png';
+            var usermarker = new google.maps.Marker({
+                position: { lat: @Model.UserLat, lng: @Model.UserLng},
+                map: map,
+                animation: google.maps.Animation.BOUNCE,
+                icon: image,
+
+            });
+        }
+
+    </script>
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBj8k95-RJyz0HNan_RcgS_-suLQVb7NzA&callback=initMap"
+            async defer>
+    </script>
+</div>
+
