@@ -71,7 +71,6 @@
 <!-- Create Google Map ------------------------------------------------------------------------>
 
     <div class="row">
-       <!-- <div id="map"></div>-->
         <script>
 
             function resetMapOrigin(){
@@ -176,12 +175,13 @@
 
 <!-- List event cards ---------------------------------------------------------------------------------------------->
 
+
 <div class="row">
     @foreach (var item in Model.Event)
     {
-
+        if (item.Date > DateTime.Now)
+        {
         <div class="card-body col-md-2 mx-auto text-center m-md-2 ">
-
 
             <a href="@Url.Content(item.Website)" style="text-decoration:none; color:black">
                 <img src="@Url.Content(item.ImagePath)" style="width: 95%; height: 40%" />
@@ -191,7 +191,7 @@
 
             </a>
         </div>
-
+        }
     }
 
 </div>
