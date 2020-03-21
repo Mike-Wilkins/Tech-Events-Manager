@@ -24,7 +24,9 @@ namespace Tech_Events_Manager.Controllers
             {
               
                Event = db.Event.OrderBy(a => a.Date).ToList()
+              
             };
+            
            
             return View(model);
         }
