@@ -1,26 +1,68 @@
 ﻿@using Microsoft.AspNet.Identity
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Midland Tech Events</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <link href="~/Style/StyleSheet1.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Baloo+Tammudu+2|Jura&display=swap" rel="stylesheet">
+</head>
+
+
 @if (Request.IsAuthenticated)
 {
     using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "" }))
     {
-    @Html.AntiForgeryToken()
+        @Html.AntiForgeryToken()
 
-    <ul class="nav navbar-nav navbar-right">
-        <li class="nav-item">
-            @Html.ActionLink("Admin User:   " + User.Identity.GetUserName(), "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage", @class = "nav-link text-dark m-3" })
-        </li>
-        <!--  <li class="nav-item"><a href="javascript:document.getElementById('logoutForm').submit()" class="nav-link text-light">Log out</a></li> -->
-        <li class="nav-item"><a href="javascript:document.getElementById('logoutForm').submit()" class="btn btn-info m-3">Log out</a></li>
-        <li class="nav-item">
-            @Html.ActionLink("Admin Menu", "AdminMenu", "Events", routeValues: null, htmlAttributes: new { id = "loginLink", @class = "btn btn-info m-3" })
-        </li>
-    </ul>
+        <ul class="nav navbar-nav navbar-right">
+            <li class="nav-item">
+                @Html.ActionLink("Admin User:   " + User.Identity.GetUserName(), "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage", @class = "nav-link text-dark m-3" })
+            </li>
+            <li class="nav-item">
+                <a href="javascript:document.getElementById('logoutForm').submit()" class="btn btn-info m-3">Log out</a>
+            </li>
+            <li class="nav-item">
+                @Html.ActionLink("Admin Menu", "AdminMenu", "Events", routeValues: null, htmlAttributes: new { id = "loginLink", @class = "btn btn-info m-3" })
+            </li>
+            <li class="nav-item">
+                @Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { id = "loginLink", @class = "nav-link text-dark m-3" })
+            </li>
+        </ul>
     }
 }
 else
 {
-<ul class="nav navbar-nav navbar-right">
-    @*<li class="nav-item">@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink", @class = "nav-link text-light"})</li>*@
-    <li class="nav-item">@Html.ActionLink("Admin", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink", @class = "nav-link text-dark m-3" })</li>
-</ul>
+    <ul class="nav navbar-nav navbar-right">
+        <li class="nav-item pt-0 pr-5">
+            @Html.ActionLink("Admin", "Login", "Account", routeValues: null, htmlAttributes: new { @class = "Link", @style="text-decoration:none"})
+        </li>
+        <li class="nav-item pt-0 pr-5">
+            @Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { id = "loginLink", @class = "Link", @style="text-decoration:none"})
+        </li>
+    </ul>
 }
+
+<style>
+    .title {
+        font-family: 'Baloo Tammudu 2', cursive;
+        font-family: 'Jura', sans-serif;
+    }
+    .Link {
+        font-family: 'Jura', sans-serif;
+        font-size:1.1em;
+        color:black;
+        
+    }
+    .Link:hover{
+         color:white;
+         padding:2em;
+        font-weight:bold;
+         background-color: grey;
+        transition: 0.3s;
+        border-radius: 10px;
+        opacity:0.5;
+    }
+</style>

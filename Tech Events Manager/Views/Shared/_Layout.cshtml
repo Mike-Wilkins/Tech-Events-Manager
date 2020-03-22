@@ -7,13 +7,17 @@
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
     <link href="~/Style/StyleSheet1.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Baloo+Tammudu+2|Jura&display=swap" rel="stylesheet">
+    
+
 
 </head>
+
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-light">
-            <div class="container">
-                @Html.ActionLink("Tech Midlands MeetUp", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-light p-0">
+            <div class="container-fluid px-3">
+                <p class="title pt-1 font-weight-bold" style="font-size: 2.2em; color:darkred">Tech Midlands MeetUp</p>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -21,7 +25,7 @@
 
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
                     @Html.Partial("_LoginPartial")
-                    <ul class="navbar-nav flex-grow-1">
+                   @* <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
                             @Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "nav-link text-dark" })
                         </li>
@@ -32,7 +36,10 @@
                             @Html.ActionLink("Contact", "Contact", "Home", new { area = "" }, new { @class = "nav-link text-dark" })
                         </li>
                     </ul>
+                       *@
                 </div>
+
+    
             </div>
         </nav>
 
@@ -41,10 +48,10 @@
    
    
     <div class="container-fluid px-0">
-        <img src="~/Image/tech3.png" class="img-fluid" style="width:100%; height: 30%; opacity: 0.9" />
+        <img src="~/Image/tech3.png" class="img-fluid" style="width:100%; opacity: 0.9" />
         <div class="caption">
-            <h2>Explore Tech Events</h2>
-            <h4>Find tech events hosted by local groups in the Midlands</h4>
+            <p class="title" style="font-size: 2.0em">Explore Tech Events</p>
+            <h4 class="title" style="font-size: 1.5em">Find tech events hosted by local groups in the Midlands</h4>
         </div>
     </div>
        
@@ -69,3 +76,11 @@
     @RenderSection("scripts", required: false)
 </body>
 </html>
+<style>
+    .title {
+    font-family: 'Baloo Tammudu 2', cursive;
+    font-family: 'Jura', sans-serif;
+}
+    
+
+</style>
