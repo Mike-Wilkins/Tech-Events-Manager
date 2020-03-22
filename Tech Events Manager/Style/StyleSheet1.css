@@ -29,7 +29,18 @@ img {
     color: white;
     position: absolute;
     top: 20%;
-    left: 15%;
+    left: 10%;
     width: 50%;
 }
-
+.title {
+    font-family: 'Baloo Tammudu 2', cursive;
+    font-family: 'Jura', sans-serif;
+}
+.nav-link{
+    color:black;
+}
+.Link {
+    font-family: 'Jura', sans-serif;
+    color: black;
+    padding-top: 20px;
+}
