@@ -7,8 +7,8 @@
 </p>
   
 ## Project Overview
-Tech Events Manager is an ASP.NET MVC application which implements GoogleMaps API and Geocoding services as a tool for enabling users to locate tech meetup events in their local area. After entering a valid UK postcode, users can filter events according to proximity from their home address.
+Tech Events Manager is an ASP.NET MVC application which implements GoogleMaps API and Geocoding services as a tool for enabling users to locate tech meetup events in their local area. After entering a valid UK postcode, users can filter events according to proximity from their home address. Implements an administrative service for managing new events, editing and deleting expired events.
 
 ## GoogleMaps & Geocoding
-When creating a new event, conversion from postcode to lat/lng is handled using Google Geocoding services and is implemted prior to submitting the entry to the database table.
+When creating a new event, conversion from postcode to lat/lng is handled using Google Geocoding services and is implemted prior to submitting the entry to the database table. This addresses potential problems occuring due to the number of Geocoding requests limited to 50 per second.
 
