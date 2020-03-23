@@ -1,4 +1,4 @@
-# Tech-Events-Manager
+# Tech Events Manager
 
 
 
