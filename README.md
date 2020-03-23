@@ -11,4 +11,5 @@ Tech Events Manager is an ASP.NET MVC application which implements GoogleMaps AP
 
 ## GoogleMaps & Geocoding
 * When creating a new event, conversion from postcode to lat/lng is handled using Google Geocoding services and is implemted prior to submitting the entry to the database table. This addresses potential problems occuring due to the restricted number of Geocoding requests limiting 50 per second.
+* Calculating distances between postcodes entered by the user and event postcodes stored on the database is achieved using the Havensine formular. 
 
