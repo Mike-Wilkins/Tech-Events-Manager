@@ -14,7 +14,7 @@
         margin-top: 20px;
         margin-bottom: 10px;
         height: 440px;
-        width: 80%;
+        width: 100%;
         padding: 40px;
     }
 
@@ -50,11 +50,11 @@
 
             @Html.DropDownListFor(m => m.Distance, new List<SelectListItem>
                {
-                   new SelectListItem() {Text = "5", Value="5"},
-                   new SelectListItem() {Text = "10", Value="10"},
-                   new SelectListItem() {Text = "20", Value="20"},
-                   new SelectListItem() {Text = "30", Value="30"},
-                   new SelectListItem() {Text = "40", Value="40"}
+                   new SelectListItem() {Text = "5 miles", Value="5"},
+                   new SelectListItem() {Text = "10 miles", Value="10"},
+                   new SelectListItem() {Text = "20 miles", Value="20"},
+                   new SelectListItem() {Text = "30 miles", Value="30"},
+                   new SelectListItem() {Text = "40 miles", Value="40"}
                }, new { @class = "form-control" })
 
         </div>
@@ -181,12 +181,12 @@
 <!-- List event cards ---------------------------------------------------------------------------------------------->
 
 
-<div class="row">
+<div class="row d-flex justify-content-center">
     @foreach (var item in Model.Event)
     {
         if (item.Date > DateTime.Now)
         {
-        <div class="card-body col-md-2 mx-auto text-center m-md-2 ">
+        <div class="card-body col-md-2 mx-auto text-center m-md-2">
 
             <a href="@Url.Content(item.Website)" style="text-decoration:none; color:black">
                 <img src="@Url.Content(item.ImagePath)" style="width: 95%; height: 40%" />
