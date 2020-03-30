@@ -13,7 +13,7 @@ namespace Tech_Events_Manager.Models
         public const int MAX_POSTCODE_LENGTH = 8;
         public const int MIN_POSTCODE_LENGTH = 5;
         public const int MAX_IMAGE_TITLE_LENGTH = 30;
-        public const int MAX_IMAGE_PATH_LENGTH = 50;
+        public const int MAX_IMAGE_PATH_LENGTH = 400;
       
     }
 }

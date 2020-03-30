@@ -10,6 +10,12 @@ using Tech_Events_Manager.Models;
 using System.IO;
 using System.Xml.XPath;
 using System.Xml.Linq;
+using Amazon.S3.Model;
+using Amazon.S3;
+using Amazon;
+using Amazon.Runtime;
+using Amazon.S3.Transfer;
+using System.Configuration;
 
 namespace Tech_Events_Manager.Controllers
 {
@@ -54,9 +60,6 @@ namespace Tech_Events_Manager.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-
-
-        
         public ActionResult Create(Event imageDB)
 
         {
@@ -64,9 +67,22 @@ namespace Tech_Events_Manager.Controllers
             string filename = Path.GetFileNameWithoutExtension(imageDB.ImageFile.FileName);
             string extension = Path.GetExtension(imageDB.ImageFile.FileName);
             filename = filename + DateTime.Now.ToString("yymmssfff") + extension;
-            imageDB.ImagePath = "~/Image/" + filename;
+            string aws_s2 = "https://tech-events-uk.s3.eu-west-2.amazonaws.com/".ToString();
+            imageDB.ImagePath = aws_s2 + filename;
+
+            System.Diagnostics.Debug.WriteLine("1st filename: " + filename);
+
+            //imageDB.ImagePath = "~/Image/" + filename;//
             filename = Path.Combine(Server.MapPath("~/Image/"), filename);
             imageDB.ImageFile.SaveAs(filename);
+
+            System.Diagnostics.Debug.WriteLine("2st filename: " + filename);
+
+
+         
+
+           
+
 
 
 
