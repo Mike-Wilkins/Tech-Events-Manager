@@ -193,6 +193,10 @@
     <Compile Include="Migrations\202003091855070_AddImageBuilderToDB.designer.cs">
       <DependentUpon>202003091855070_AddImageBuilderToDB.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202003301506484_ExtendImagePathLength.cs" />
+    <Compile Include="Migrations\202003301506484_ExtendImagePathLength.designer.cs">
+      <DependentUpon>202003301506484_ExtendImagePathLength.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Event.cs" />
@@ -389,6 +393,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202003091855070_AddImageBuilderToDB.resx">
       <DependentUpon>202003091855070_AddImageBuilderToDB.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202003301506484_ExtendImagePathLength.resx">
+      <DependentUpon>202003301506484_ExtendImagePathLength.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
