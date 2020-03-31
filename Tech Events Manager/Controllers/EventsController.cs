@@ -63,7 +63,7 @@ namespace Tech_Events_Manager.Controllers
         public ActionResult Create(Event imageDB)
 
         {
-            // Uplaod event image to database//
+            // Upload event image to database//
             string filename = Path.GetFileNameWithoutExtension(imageDB.ImageFile.FileName);
             string extension = Path.GetExtension(imageDB.ImageFile.FileName);
             filename = filename + DateTime.Now.ToString("yymmssfff") + extension;
@@ -79,9 +79,14 @@ namespace Tech_Events_Manager.Controllers
             System.Diagnostics.Debug.WriteLine("2st filename: " + filename);
 
 
-         
 
-           
+
+
+
+
+
+
+
 
 
 
