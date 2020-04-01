@@ -70,7 +70,7 @@ namespace Tech_Events_Manager.Controllers
         public ActionResult Create(Event imageDB)
 
         {
-            // Upload event image to database//
+            // Upload event image path to database//
             string filename = Path.GetFileNameWithoutExtension(imageDB.ImageFile.FileName);
             string extension = Path.GetExtension(imageDB.ImageFile.FileName);
             filename = filename + DateTime.Now.ToString("yymmssfff") + extension;
@@ -80,33 +80,64 @@ namespace Tech_Events_Manager.Controllers
             string aws_s2 = "https://tech-events-uk.s3.eu-west-2.amazonaws.com/".ToString();
             imageDB.ImagePath = aws_s2 + filename;
 
-           
-            filename = Path.Combine(Server.MapPath("~/Image/"), filename);
+            /*
+            filename = Path.Combine(Server.MapPath("~/Image/"), filename);  
             imageDB.ImageFile.SaveAs(filename);
+            */
 
 
-            //Upload image to AWS S3 ------------//
-            var s3Client = new AmazonS3Client(accesskey, secretkey, bucketRegion);
-            var fileTransferUtility = new TransferUtility(s3Client);
+            HttpPostedFileBase file = Request.Files[0];
+
+            System.Diagnostics.Debug.WriteLine(file.FileName);
 
 
-            var filePath = Path.Combine(Server.MapPath("~/Image"), Path.GetFileName(imageDB.ImagePath));
-            var fileTransferUtilityRequest = new TransferUtilityUploadRequest
-            {
-                BucketName = bucketName,
-                FilePath = filePath,
-                StorageClass = S3StorageClass.StandardInfrequentAccess,
-                PartSize = 6291456, // 6 MB.  
-                Key = keyName,
-                CannedACL = S3CannedACL.PublicRead
-            };
-            fileTransferUtilityRequest.Metadata.Add("param1", "Value1");
-            fileTransferUtilityRequest.Metadata.Add("param2", "Value2");
-            fileTransferUtility.Upload(fileTransferUtilityRequest);
-            fileTransferUtility.Dispose();
 
-            //Coverts postcode to latitude and longitude and upload to database//
-            string requestUri = string.Format("https://maps.googleapis.com/maps/api/geocode/xml?key={1}&address={0}&sensor=false",
+
+            
+            
+
+
+
+
+                
+
+
+                //Upload image to AWS S3 ------------//
+                var s3Client = new AmazonS3Client(accesskey, secretkey, bucketRegion);
+                var fileTransferUtility = new TransferUtility(s3Client);
+
+
+                // var filePath = Path.Combine(Server.MapPath("~/Image"), Path.GetFileName(imageDB.ImagePath));
+
+
+
+
+                var fileTransferUtilityRequest = new TransferUtilityUploadRequest
+                {
+                    BucketName = bucketName,
+                    // FilePath = filePath,
+                    InputStream = file.InputStream,
+                    StorageClass = S3StorageClass.StandardInfrequentAccess,
+                    PartSize = 6291456, // 6 MB.  
+                    Key = keyName,
+                    CannedACL = S3CannedACL.PublicRead
+                };
+                fileTransferUtilityRequest.Metadata.Add("param1", "Value1");
+                fileTransferUtilityRequest.Metadata.Add("param2", "Value2");
+                fileTransferUtility.Upload(fileTransferUtilityRequest);
+                fileTransferUtility.Dispose();
+
+
+        
+
+
+
+
+
+
+
+                //Coverts postcode to latitude and longitude and upload to database//
+                string requestUri = string.Format("https://maps.googleapis.com/maps/api/geocode/xml?key={1}&address={0}&sensor=false",
                Uri.EscapeDataString(imageDB.Postcode), "AIzaSyBj8k95-RJyz0HNan_RcgS_-suLQVb7NzA");
 
             WebRequest request = WebRequest.Create(requestUri);
