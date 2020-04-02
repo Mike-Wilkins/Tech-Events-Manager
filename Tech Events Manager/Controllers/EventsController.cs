@@ -22,7 +22,7 @@ namespace Tech_Events_Manager.Controllers
     public class EventsController : Controller
     {
 
-        private const string filePath = null; 
+        //private const string filePath = null; 
         private static readonly string bucketName = ConfigurationManager.AppSettings["BucketName"];
         private static readonly RegionEndpoint bucketRegion = RegionEndpoint.EUWest2;
         private static readonly string accesskey = ConfigurationManager.AppSettings["AWSAccessKey"];
@@ -80,42 +80,18 @@ namespace Tech_Events_Manager.Controllers
             string aws_s2 = "https://tech-events-uk.s3.eu-west-2.amazonaws.com/".ToString();
             imageDB.ImagePath = aws_s2 + filename;
 
-            /*
-            filename = Path.Combine(Server.MapPath("~/Image/"), filename);  
-            imageDB.ImageFile.SaveAs(filename);
-            */
+           
 
-
+            //Upload image to AWS S3 ------------//
             HttpPostedFileBase file = Request.Files[0];
 
-            System.Diagnostics.Debug.WriteLine(file.FileName);
-
-
-
-
-            
-            
-
-
-
-
-                
-
-
-                //Upload image to AWS S3 ------------//
+               
                 var s3Client = new AmazonS3Client(accesskey, secretkey, bucketRegion);
                 var fileTransferUtility = new TransferUtility(s3Client);
-
-
-                // var filePath = Path.Combine(Server.MapPath("~/Image"), Path.GetFileName(imageDB.ImagePath));
-
-
-
 
                 var fileTransferUtilityRequest = new TransferUtilityUploadRequest
                 {
                     BucketName = bucketName,
-                    // FilePath = filePath,
                     InputStream = file.InputStream,
                     StorageClass = S3StorageClass.StandardInfrequentAccess,
                     PartSize = 6291456, // 6 MB.  
@@ -126,14 +102,6 @@ namespace Tech_Events_Manager.Controllers
                 fileTransferUtilityRequest.Metadata.Add("param2", "Value2");
                 fileTransferUtility.Upload(fileTransferUtilityRequest);
                 fileTransferUtility.Dispose();
-
-
-        
-
-
-
-
-
 
 
                 //Coverts postcode to latitude and longitude and upload to database//
