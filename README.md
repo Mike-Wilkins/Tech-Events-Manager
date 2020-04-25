@@ -13,5 +13,4 @@ Tech Events Manager is an ASP.NET MVC application which implements GoogleMaps AP
 * When creating a new event, conversion from postcode to lat/lng is handled using Google Geocoding services and is implemented prior to submitting the entry to the database table. This addresses potential problems occuring due to the restricted number of Geocoding requests limiting 50 per second.
 * The proximity filter is implemented using a Havensine formular which is applied prior to rendering each marker on the map. The code for this operation can be found in the home index view file which calculates the distance between postcodes entered by the user and event postcodes stored on the database. The filtering process is implemented using conditional logic which restricts the rendering of markers based on the distance defined by the user. 
 
-<a href="https://gifs.com/gif/techevents-81NyVr"><img src="https://j.gifs.com/81NyVr.gif"/></a>
-![Output sample](https://gifs.com/gif/techevents-81NyVr)
+
