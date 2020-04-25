@@ -14,3 +14,4 @@ Tech Events Manager is an ASP.NET MVC application which implements GoogleMaps AP
 * The proximity filter is implemented using a Havensine formular which is applied prior to rendering each marker on the map. The code for this operation can be found in the home index view file which calculates the distance between postcodes entered by the user and event postcodes stored on the database. The filtering process is implemented using conditional logic which restricts the rendering of markers based on the distance defined by the user. 
 
 [!Output sample](https://j.gifs.com/81NyVr.gif)
+<iframe src='//gifs.com/embed/techevents-81NyVr' frameborder='0' scrolling='no' width='1280px' height='720px' style='webkit-backface-visibility: hidden;-webkit-transform: scale(1);'></iframe>
