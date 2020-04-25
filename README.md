@@ -1,5 +1,5 @@
 # Tech Events Manager
-![Website Link](http://techeventsmidlands.apphb.com/)
+[Website Link](http://techeventsmidlands.apphb.com/)
 
 <p float="left">
   <img src="platform_images/Google-maps-changes.jpg" width="150">
