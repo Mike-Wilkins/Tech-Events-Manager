@@ -40,7 +40,7 @@ namespace Tech_Events_Manager.Controllers
             {
            
             string requestUri = string.Format("https://maps.googleapis.com/maps/api/geocode/xml?key={1}&address={0}&sensor=false",
-              Uri.EscapeDataString(location.UserPostcode), "AIzaSyBj8k95-RJyz0HNan_RcgS_-suLQVb7NzA");
+              Uri.EscapeDataString(location.UserPostcode), "ENTER_KEY_HERE");
 
             WebRequest request = WebRequest.Create(requestUri);
             WebResponse response = request.GetResponse();
